@@ -68,8 +68,8 @@ style_store/
 
 **1. Клонировать репозиторий**
 ```bash
-git clone https://github.com/<username>/style-store.git
-cd style-store
+git clone https://github.com/Kewanmov/Style-store.git
+cd Style-store
 ```
 
 **2. Настроить окружение**
