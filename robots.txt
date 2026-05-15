@@ -1,0 +1,8 @@
+robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /profile.html
+Disallow: /cart.html
+Disallow: /checkout.html
+Disallow: /reset-password.html

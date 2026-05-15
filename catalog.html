@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог — STYLE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#722f37',
+                        wine: '#4a1520',
+                        dark: '#111111',
+                        beige: '#f5f0eb'
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/catalog.css">
+</head>
+<body class="font-sans bg-white text-dark">
+
+    <header class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-2xl font-heading font-extrabold tracking-tight">STYLE</a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="catalog.html?category=3" class="hover:text-accent transition-colors">Детям</a>
+                <a href="catalog.html?category=1" class="hover:text-accent transition-colors">Мужчинам</a>
+                <a href="catalog.html?category=2" class="hover:text-accent transition-colors">Женщинам</a>
+                <a href="catalog.html" class="hover:text-accent transition-colors">Каталог</a>
+                <a href="about.html" class="hover:text-accent transition-colors">О нас</a>
+            </nav>
+            <div class="flex items-center gap-5">
+                <a href="favorites.html" class="hover:text-accent transition-colors" title="Избранное">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </a>
+                <a href="cart.html" class="hover:text-accent transition-colors relative" title="Корзина">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-accent text-white text-xs w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
+                </a>
+                <a href="login.html" id="auth-link" class="hidden md:block text-sm font-medium bg-accent text-white px-4 py-2 rounded-full hover:bg-wine transition-colors">Войти</a>
+                <button id="burger-btn" class="md:hidden flex flex-col gap-1.5" aria-label="Меню" aria-expanded="false">
+                    <span class="block w-6 h-0.5 bg-dark transition-all burger-line"></span>
+                    <span class="block w-6 h-0.5 bg-dark transition-all burger-line"></span>
+                    <span class="block w-6 h-0.5 bg-dark transition-all burger-line"></span>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="mobile-menu md:hidden">
+            <nav class="flex flex-col items-center gap-5 py-6 text-base font-medium">
+                <a href="catalog.html?category=3" class="hover:text-accent transition-colors">Детям</a>
+                <a href="catalog.html?category=1" class="hover:text-accent transition-colors">Мужчинам</a>
+                <a href="catalog.html?category=2" class="hover:text-accent transition-colors">Женщинам</a>
+                <a href="catalog.html" class="hover:text-accent transition-colors">Каталог</a>
+                <a href="about.html" class="hover:text-accent transition-colors">О нас</a>
+                <a href="favorites.html" class="hover:text-accent transition-colors">Избранное</a>
+                <a href="login.html" id="mobile-auth-link" class="bg-accent text-white px-6 py-2 rounded-full hover:bg-wine transition-colors">Войти</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="catalog-hero">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-4">
+                <a href="index.html" class="text-white/60 hover:text-white transition-colors text-sm">Главная</a>
+                <span class="text-white/30">/</span>
+                <span class="text-sm text-white" id="catalog-breadcrumb">Каталог</span>
+            </div>
+            <h1 id="catalog-title" class="text-4xl md:text-6xl font-heading font-bold text-white">Каталог</h1>
+            <p id="catalog-count" class="text-white/60 mt-3 text-sm"></p>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-6 py-10">
+
+        <div class="catalog-search-bar">
+            <input type="text" id="catalog-search" placeholder="Поиск по товарам..." autocomplete="off">
+            <button id="catalog-search-clear" class="hidden" title="Очистить">✕</button>
+        </div>
+
+        <div class="catalog-toolbar">
+            <div class="toolbar-left">
+                <button id="filter-toggle" class="filter-toggle-btn md:hidden">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M4 21v-7m0-4V3m8 18v-9m0-4V3m8 18v-5m0-4V3M1 14h6M9 8h6M17 16h6"/>
+                    </svg>
+                    Фильтры
+                </button>
+                <div class="active-filters" id="active-filters"></div>
+            </div>
+            <div class="toolbar-right">
+                <div class="sort-wrapper">
+                    <select id="sort-select" class="sort-select">
+                        <option value="newest">Сначала новые</option>
+                        <option value="price_asc">Цена: по возрастанию</option>
+                        <option value="price_desc">Цена: по убыванию</option>
+                        <option value="name">По названию</option>
+                    </select>
+                    <svg class="sort-chevron" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                </div>
+                <div class="view-toggle hidden md:flex">
+                    <button id="view-grid" class="view-btn active" title="Сетка">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                            <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+                        </svg>
+                    </button>
+                    <button id="view-list" class="view-btn" title="Список">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/>
+                            <line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/>
+                            <line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="catalog-layout">
+
+            <aside id="sidebar" class="catalog-sidebar">
+                <div class="sidebar-header md:hidden">
+                    <h3 class="text-lg font-semibold">Фильтры</h3>
+                    <button id="sidebar-close" class="sidebar-close-btn">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="filter-section">
+                    <h4 class="filter-title">Категории</h4>
+                    <div id="category-list" class="filter-options">
+                        <div class="filter-skeleton"><div class="skeleton-box" style="width:80%;height:14px"></div></div>
+                        <div class="filter-skeleton"><div class="skeleton-box" style="width:60%;height:14px"></div></div>
+                        <div class="filter-skeleton"><div class="skeleton-box" style="width:70%;height:14px"></div></div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h4 class="filter-title">Цена, ₽</h4>
+                    <div class="price-range">
+                        <input type="number" id="price-min" class="price-input" placeholder="От">
+                        <span class="price-dash">—</span>
+                        <input type="number" id="price-max" class="price-input" placeholder="До">
+                    </div>
+                    <button id="price-apply" class="price-apply-btn">Применить</button>
+                </div>
+
+                <button id="reset-filters" class="reset-btn hidden">Сбросить фильтры</button>
+            </aside>
+
+            <div class="catalog-main">
+                <div id="catalog-grid" class="catalog-grid">
+                    <div class="product-skeleton"><div class="skeleton-box skel-img"></div><div class="skel-body"><div class="skeleton-box" style="width:40%;height:12px"></div><div class="skeleton-box" style="width:70%;height:16px;margin-top:8px"></div><div class="skeleton-box" style="width:50%;height:20px;margin-top:10px"></div></div></div>
+                    <div class="product-skeleton"><div class="skeleton-box skel-img"></div><div class="skel-body"><div class="skeleton-box" style="width:40%;height:12px"></div><div class="skeleton-box" style="width:70%;height:16px;margin-top:8px"></div><div class="skeleton-box" style="width:50%;height:20px;margin-top:10px"></div></div></div>
+                    <div class="product-skeleton"><div class="skeleton-box skel-img"></div><div class="skel-body"><div class="skeleton-box" style="width:40%;height:12px"></div><div class="skeleton-box" style="width:70%;height:16px;margin-top:8px"></div><div class="skeleton-box" style="width:50%;height:20px;margin-top:10px"></div></div></div>
+                    <div class="product-skeleton"><div class="skeleton-box skel-img"></div><div class="skel-body"><div class="skeleton-box" style="width:40%;height:12px"></div><div class="skeleton-box" style="width:70%;height:16px;margin-top:8px"></div><div class="skeleton-box" style="width:50%;height:20px;margin-top:10px"></div></div></div>
+                    <div class="product-skeleton"><div class="skeleton-box skel-img"></div><div class="skel-body"><div class="skeleton-box" style="width:40%;height:12px"></div><div class="skeleton-box" style="width:70%;height:16px;margin-top:8px"></div><div class="skeleton-box" style="width:50%;height:20px;margin-top:10px"></div></div></div>
+                    <div class="product-skeleton"><div class="skeleton-box skel-img"></div><div class="skel-body"><div class="skeleton-box" style="width:40%;height:12px"></div><div class="skeleton-box" style="width:70%;height:16px;margin-top:8px"></div><div class="skeleton-box" style="width:50%;height:20px;margin-top:10px"></div></div></div>
+                </div>
+
+                <div id="catalog-empty" class="catalog-empty hidden">
+                    <div class="catalog-empty-icon">
+                        <svg width="64" height="64" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-heading font-bold mt-4 mb-2">Ничего не найдено</h3>
+                    <p class="text-gray-400 text-sm">Попробуйте изменить фильтры</p>
+                </div>
+
+                <div id="pagination" class="pagination hidden"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <div>
+                    <h3 class="text-2xl font-heading font-bold mb-4">STYLE</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Премиум брендовая одежда с 2010 года.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-5 text-sm uppercase tracking-wider">Навигация</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Главная</a></li>
+                        <li><a href="catalog.html" class="hover:text-white transition-colors">Каталог</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">О нас</a></li>
+                        <li><a href="favorites.html" class="hover:text-white transition-colors">Избранное</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-5 text-sm uppercase tracking-wider">Контакты</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li>info@style.ru</li>
+                        <li>+7 (495) 123-45-67</li>
+                        <li>Пн–Пт: 10:00–20:00</li>
+                        <li>Москва, ул. Моды, 1</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-5 text-sm uppercase tracking-wider">Мы в соцсетях</h4>
+                    <div class="flex gap-3">
+                        <a href="#" class="social-link" aria-label="Telegram">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 1 0 24 12.056A12.014 12.014 0 0 0 11.944 0Zm5.654 7.354-1.888 8.908a.906.906 0 0 1-1.336.596l-3.16-2.3-1.72 1.636a.282.282 0 0 1-.398-.106l-.454-2.476-.042-.19-2.476-1.154a.51.51 0 0 1 .022-.936l10.2-3.956a.56.56 0 0 1 .752.478c.006.034-.002.178-.5.5Z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="VK">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4 8.574 4 8.133c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.864 2.49 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.204.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.254-1.406 2.15-3.574 2.15-3.574.119-.254.322-.491.762-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.05.17.49-.085.744-.576.744z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+                <p>© 2026 STYLE. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="sidebar-overlay" class="sidebar-overlay hidden"></div>
+    <script src="main/config.js"></script>
+    <script src="main/catalog.js"></script>
+</body>
+</html>

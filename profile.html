@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль — STYLE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#722f37',
+                        wine:   '#4a1520',
+                        dark:   '#111111',
+                        beige:  '#f5f0eb'
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        sans:    ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/profile.css">
+</head>
+<body class="font-sans bg-[#fafafa] text-dark min-h-screen flex flex-col">
+
+    <header class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-2xl font-heading font-extrabold tracking-tight">STYLE</a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="catalog.html?category=3" class="hover:text-accent transition-colors">Детям</a>
+                <a href="catalog.html?category=1" class="hover:text-accent transition-colors">Мужчинам</a>
+                <a href="catalog.html?category=2" class="hover:text-accent transition-colors">Женщинам</a>
+                <a href="catalog.html" class="hover:text-accent transition-colors">Каталог</a>
+                <a href="about.html" class="hover:text-accent transition-colors">О нас</a>
+            </nav>
+            <div class="flex items-center gap-5">
+                <a href="favorites.html" class="hover:text-accent transition-colors" title="Избранное">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </a>
+                <a href="cart.html" class="hover:text-accent transition-colors relative" title="Корзина">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-accent text-white text-xs w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
+                </a>
+                <a href="profile.html" id="auth-link" class="hidden md:block text-sm font-medium bg-accent text-white px-4 py-2 rounded-full hover:bg-wine transition-colors">Профиль</a>
+                <button id="burger-btn" class="md:hidden flex flex-col gap-1.5" aria-label="Меню" aria-expanded="false">
+                    <span class="block w-6 h-0.5 bg-dark transition-all burger-line"></span>
+                    <span class="block w-6 h-0.5 bg-dark transition-all burger-line"></span>
+                    <span class="block w-6 h-0.5 bg-dark transition-all burger-line"></span>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="mobile-menu md:hidden">
+            <nav class="flex flex-col items-center gap-5 py-6 text-base font-medium">
+                <a href="catalog.html?category=3" class="hover:text-accent transition-colors">Детям</a>
+                <a href="catalog.html?category=1" class="hover:text-accent transition-colors">Мужчинам</a>
+                <a href="catalog.html?category=2" class="hover:text-accent transition-colors">Женщинам</a>
+                <a href="catalog.html" class="hover:text-accent transition-colors">Каталог</a>
+                <a href="about.html" class="hover:text-accent transition-colors">О нас</a>
+                <a href="favorites.html" class="hover:text-accent transition-colors">Избранное</a>
+                <a href="profile.html" id="mobile-auth-link" class="bg-accent text-white px-6 py-2 rounded-full hover:bg-wine transition-colors">Профиль</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="mt-[73px] flex-1">
+        <div class="max-w-5xl mx-auto px-6 pt-8 pb-20">
+
+            <div class="flex items-center gap-3 mb-8 text-sm">
+                <a href="index.html" class="text-gray-400 hover:text-accent transition-colors">Главная</a>
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="text-gray-300">
+                    <path d="M9 18l6-6-6-6"/>
+                </svg>
+                <span class="font-medium text-dark">Профиль</span>
+            </div>
+
+            <div class="profile-layout">
+
+                <aside class="profile-sidebar">
+                    <div class="profile-user-card">
+                        <div class="avatar-upload-wrapper" id="avatar-wrapper" title="Изменить фото">
+                            <div class="profile-avatar" id="profile-avatar">U</div>
+                            <div class="avatar-upload-overlay">
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                                    <circle cx="12" cy="13" r="4"/>
+                                </svg>
+                            </div>
+                            <input type="file" id="avatar-input" accept="image/jpeg,image/png,image/webp" style="display:none">
+                        </div>
+                        <div>
+                            <div class="profile-user-name" id="profile-name">Загрузка...</div>
+                            <div class="profile-user-email" id="profile-email">—</div>
+                        </div>
+                    </div>
+
+                    <nav class="profile-nav">
+                        <button class="profile-nav-item active" data-tab="orders">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+                                <rect x="9" y="3" width="6" height="4" rx="1"/>
+                            </svg>
+                            Мои заказы
+                        </button>
+                        <button class="profile-nav-item" data-tab="personal">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                            Личные данные
+                        </button>
+                        <button class="profile-nav-item" data-tab="favorites">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                            Избранное
+                        </button>
+                        <button class="profile-nav-item" data-tab="history">
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <polyline points="12 8 12 12 14 14"/>
+                                <path d="M3.05 11a9 9 0 1 0 .5-4.5"/>
+                                <polyline points="3 3 3 9 9 9"/>
+                            </svg>
+                            Просмотренные
+                        </button>
+                    </nav>
+
+                    <button class="profile-logout-btn" id="logout-btn">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16 17 21 12 16 7"/>
+                            <line x1="21" y1="12" x2="9" y2="12"/>
+                        </svg>
+                        Выйти
+                    </button>
+                </aside>
+
+                <div class="profile-content">
+
+                    <div id="tab-orders" class="profile-tab active">
+                        <div class="profile-card">
+                            <h2 class="profile-card-title">Мои заказы</h2>
+                            <div id="orders-loading" class="orders-skeleton">
+                                <div class="order-skeleton-item">
+                                    <div class="skeleton-box" style="width:120px;height:20px"></div>
+                                    <div class="skeleton-box" style="width:80px;height:26px;border-radius:20px"></div>
+                                    <div class="skeleton-box" style="width:90px;height:20px"></div>
+                                </div>
+                                <div class="order-skeleton-item">
+                                    <div class="skeleton-box" style="width:100px;height:20px"></div>
+                                    <div class="skeleton-box" style="width:70px;height:26px;border-radius:20px"></div>
+                                    <div class="skeleton-box" style="width:80px;height:20px"></div>
+                                </div>
+                            </div>
+                            <div id="orders-list" class="orders-list"></div>
+                            <div id="orders-empty" class="profile-empty hidden">
+                                <div class="profile-empty-icon">
+                                    <svg width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24">
+                                        <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+                                        <rect x="9" y="3" width="6" height="4" rx="1"/>
+                                    </svg>
+                                </div>
+                                <h3>У вас пока нет заказов</h3>
+                                <p>Самое время найти что-то особенное в нашем каталоге</p>
+                                <a href="catalog.html" class="profile-empty-btn">Перейти в каталог</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tab-personal" class="profile-tab">
+                        <div class="profile-card">
+                            <h2 class="profile-card-title">Личные данные</h2>
+                            <form id="personal-form" class="profile-form">
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-name">Имя</label>
+                                    <input type="text" id="edit-name" class="profile-input" placeholder="Ваше имя" maxlength="100">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-email">Email</label>
+                                    <input type="email" id="edit-email" class="profile-input" placeholder="email@example.com" disabled>
+                                    <span class="text-xs text-gray-400 mt-1">Email изменить нельзя</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-phone">Телефон</label>
+                                    <input type="tel" id="edit-phone" class="profile-input" placeholder="+7 (999) 123-45-67" maxlength="18">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="edit-address">Адрес</label>
+                                    <input type="text" id="edit-address" class="profile-input" placeholder="Город, улица, дом" maxlength="255">
+                                </div>
+                                <div id="personal-error" class="text-sm text-red-600 hidden"></div>
+                                <button type="submit" class="profile-save-btn">Сохранить изменения</button>
+                            </form>
+                        </div>
+
+                        <div class="profile-card" style="margin-top:24px">
+                            <h2 class="profile-card-title">Изменить пароль</h2>
+                            <form id="password-form" class="profile-form">
+                                <div class="form-group">
+                                    <label class="form-label" for="old-password">Текущий пароль</label>
+                                    <input type="password" id="old-password" class="profile-input" placeholder="Текущий пароль">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="new-password">Новый пароль</label>
+                                    <input type="password" id="new-password" class="profile-input" placeholder="Минимум 6 символов">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="new-password2">Повторите новый пароль</label>
+                                    <input type="password" id="new-password2" class="profile-input" placeholder="Повторите пароль">
+                                </div>
+                                <div id="password-error" class="text-sm text-red-600 hidden"></div>
+                                <div id="password-success" class="text-sm text-green-700 hidden"></div>
+                                <button type="submit" class="profile-save-btn">Изменить пароль</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="tab-history" class="profile-tab">
+                        <div class="profile-card">
+                            <h2 class="profile-card-title">Недавно просмотренные</h2>
+                            <div id="history-grid" class="profile-fav-grid"></div>
+                            <div id="history-empty" class="profile-empty hidden">
+                                <div class="profile-empty-icon">
+                                    <svg width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="10"/>
+                                        <polyline points="12 6 12 12 16 14"/>
+                                    </svg>
+                                </div>
+                                <h3>История пуста</h3>
+                                <p>Заходите на страницы товаров — они появятся здесь</p>
+                                <a href="catalog.html" class="profile-empty-btn">Перейти в каталог</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tab-favorites" class="profile-tab">
+                        <div class="profile-card">
+                            <h2 class="profile-card-title">Избранное</h2>
+                            <div id="profile-fav-grid" class="profile-fav-grid"></div>
+                            <div id="profile-fav-empty" class="profile-empty hidden">
+                                <div class="profile-empty-icon">
+                                    <svg width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                    </svg>
+                                </div>
+                                <h3>Список избранного пуст</h3>
+                                <p>Добавляйте товары в избранное, нажимая на сердечко</p>
+                                <a href="catalog.html" class="profile-empty-btn">Перейти в каталог</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <div>
+                    <h3 class="text-2xl font-heading font-extrabold mb-4">STYLE</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Премиум брендовая одежда с 2010 года. Качество, стиль и элегантность в каждой детали.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-5 text-sm uppercase tracking-wider">Навигация</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Главная</a></li>
+                        <li><a href="catalog.html" class="hover:text-white transition-colors">Каталог</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">О нас</a></li>
+                        <li><a href="favorites.html" class="hover:text-white transition-colors">Избранное</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-5 text-sm uppercase tracking-wider">Контакты</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li>info@style.ru</li>
+                        <li>+7 (495) 123-45-67</li>
+                        <li>Пн–Пт: 10:00–20:00</li>
+                        <li>Москва, ул. Моды, 1</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-5 text-sm uppercase tracking-wider">Мы в соцсетях</h4>
+                    <div class="flex gap-3">
+                        <a href="#" class="social-link" aria-label="Telegram">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 1 0 24 12.056A12.014 12.014 0 0 0 11.944 0Zm5.654 7.354-1.888 8.908a.906.906 0 0 1-1.336.596l-3.16-2.3-1.72 1.636a.282.282 0 0 1-.398-.106l-.454-2.476-.042-.19-2.476-1.154a.51.51 0 0 1 .022-.936l10.2-3.956a.56.56 0 0 1 .752.478c.006.034-.002.178-.5.5Z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="VK">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4 8.574 4 8.133c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.864 2.49 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.204.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.254-1.406 2.15-3.574 2.15-3.574.119-.254.322-.491.762-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.779 1.203 1.253.745.847 1.32 1.558 1.473 2.05.17.49-.085.744-.576.744z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+                <p>© 2026 STYLE. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main/config.js"></script>
+    <script src="main/profile.js"></script>
+</body>
+</html>

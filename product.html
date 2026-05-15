@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Товар — STYLE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { accent: '#722f37', wine: '#4a1520', dark: '#111111', beige: '#f5f0eb' },
+                    fontFamily: { heading: ['Montserrat', 'sans-serif'], sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/product.css">
+</head>
+<body class="font-sans bg-white text-dark min-h-screen flex flex-col">
+
+    <!-- HEADER (скопируй из catalog.html или index.html, он у тебя одинаковый) -->
+    <header class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-2xl font-heading font-extrabold tracking-tight">STYLE</a>
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="catalog.html?category=3" class="hover:text-accent">Детям</a>
+                <a href="catalog.html?category=1" class="hover:text-accent">Мужчинам</a>
+                <a href="catalog.html?category=2" class="hover:text-accent">Женщинам</a>
+                <a href="catalog.html" class="hover:text-accent">Каталог</a>
+                <a href="about.html" class="hover:text-accent">О нас</a>
+            </nav>
+            <div class="flex items-center gap-5">
+                <a href="favorites.html" class="hover:text-accent" title="Избранное">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </a>
+                <a href="cart.html" class="hover:text-accent relative" title="Корзина">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-accent text-white text-xs w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
+                </a>
+                <a href="login.html" id="auth-link" class="hidden md:block text-sm font-medium bg-accent text-white px-4 py-2 rounded-full hover:bg-wine">Войти</a>
+                <button id="burger-btn" class="md:hidden flex flex-col gap-1.5" aria-label="Меню">
+                    <span class="block w-6 h-0.5 bg-dark burger-line"></span>
+                    <span class="block w-6 h-0.5 bg-dark burger-line"></span>
+                    <span class="block w-6 h-0.5 bg-dark burger-line"></span>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="mobile-menu md:hidden">
+            <nav class="flex flex-col items-center gap-5 py-6 text-base font-medium">
+                <a href="catalog.html" class="hover:text-accent">Каталог</a>
+                <a href="favorites.html" class="hover:text-accent">Избранное</a>
+                <a href="login.html" id="mobile-auth-link" class="bg-accent text-white px-6 py-2 rounded-full hover:bg-wine">Войти</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="mt-[73px] flex-1">
+        <div class="max-w-7xl mx-auto px-6 pt-8 pb-20">
+            <!-- Хлебные крошки -->
+            <div class="flex items-center gap-3 mb-6 text-sm">
+                <a href="index.html" class="text-gray-400 hover:text-accent">Главная</a>
+                <span class="text-gray-300">/</span>
+                <a href="catalog.html" id="product-category-link" class="text-gray-400 hover:text-accent">Каталог</a>
+                <span class="text-gray-300">/</span>
+                <span id="bread-product" class="font-medium text-dark">Товар</span>
+            </div>
+
+            <!-- Контент товара -->
+            <div id="product-loading" class="text-center py-20 text-gray-400">Загрузка...</div>
+            
+            <div id="product-content" class="hidden grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="product-gallery">
+                    <img id="main-image" src="" alt="" class="w-full rounded-2xl object-cover">
+                </div>
+                <div class="product-info">
+                    <h1 id="product-name" class="text-3xl md:text-4xl font-heading font-bold mb-2"></h1>
+                    <div id="product-price" class="text-2xl font-semibold text-accent mb-4"></div>
+                    <div id="product-stock" class="product-stock mb-6"></div>
+                    
+                    <div id="size-section" class="hidden mb-6">
+                        <p class="text-sm font-medium mb-2">Размер: <span id="size-selected-label">не выбран</span></p>
+                        <div id="size-grid" class="flex flex-wrap gap-2"></div>
+                        <p id="size-error" class="text-red-500 text-sm mt-2 hidden">Выберите размер</p>
+                    </div>
+
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="flex items-center border rounded-full">
+                            <button id="qty-minus" class="px-4 py-2 hover:text-accent">−</button>
+                            <span id="qty-value" class="px-4 font-medium">1</span>
+                            <button id="qty-plus" class="px-4 py-2 hover:text-accent">+</button>
+                        </div>
+                        <button id="add-to-cart-btn" class="bg-accent text-white px-8 py-3 rounded-full font-semibold hover:bg-wine transition-colors">В корзину</button>
+                        <button id="fav-btn" class="border border-gray-200 p-3 rounded-full hover:border-accent hover:text-accent transition-colors">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        </button>
+                    </div>
+
+                    <div id="product-description" class="text-gray-600 leading-relaxed"></div>
+                </div>
+            </div>
+
+            <div id="product-not-found" class="hidden text-center py-20">
+                <h2 class="text-2xl font-heading font-bold mb-2">Товар не найден</h2>
+                <a href="catalog.html" class="text-accent hover:underline">Вернуться в каталог</a>
+            </div>
+
+            <!-- Похожие товары -->
+            <div id="related-section" class="hidden mt-16">
+                <h2 class="text-2xl font-heading font-bold mb-6">Вам может понравиться</h2>
+                <div id="related-grid" class="grid grid-cols-2 md:grid-cols-4 gap-6"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER (копия из других страниц) -->
+    <footer class="bg-dark text-white py-12 text-center text-gray-400 text-sm">
+        <p>© 2026 STYLE. Все права защищены.</p>
+    </footer>
+
+    <!-- ⚠️ ВАЖНО: именно product.js, а не profile.js -->
+    <script src="main/config.js"></script>
+    <script src="main/product.js"></script>
+</body>
+</html>

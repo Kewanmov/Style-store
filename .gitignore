@@ -1,0 +1,38 @@
+# .gitignore
+# Claude Code
+.claude/
+CLAUDE.md
+
+# Environment
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+backend/venv/
+*.egg-info/
+
+# Uploads — не хранить пользовательские файлы в репо
+backend/uploads/products/*
+backend/uploads/avatars/*
+!backend/uploads/products/.gitkeep
+!backend/uploads/avatars/.gitkeep
+
+# Alembic versions (генерируются локально)
+backend/alembic/versions/*.py
+!backend/alembic/versions/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
